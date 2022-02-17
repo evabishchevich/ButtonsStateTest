@@ -1,11 +1,12 @@
 # ButtonsStateTest
 
-A test project to play with FSM vs Redux state management.
+A test project to play with different approaches of state management.
 
-There are 4 general states: Idle, Loading, Result, Error.  
-Test buttons should be visible in Idle, Result and Error states.
+There are 4 general states: `Idle`, `Loading`, `Result`, `Error`.
 
-Click on every button should paint a button in a different color. The other buttons should be
-painted into a default color.
+### Requirements
 
-Going from Error/Result states to Idle should paint all button with a default color.
+1. Test buttons should be visible in `Idle`, `Result` and `Error` states.
+2. Click on a button should change a color of this button. The other buttons should be painted into
+   a default color.
+3. Going from `Error`/`Result` states to `Idle` should paint all buttons with a default color.
