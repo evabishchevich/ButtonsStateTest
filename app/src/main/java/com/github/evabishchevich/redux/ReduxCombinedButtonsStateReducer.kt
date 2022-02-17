@@ -1,18 +1,18 @@
-package com.github.evabishchevich
+package com.github.evabishchevich.redux
 
-class CombinedButtonsState(
-    val b1State: ButtonState,
-    val b2State: ButtonState,
-    val b3State: ButtonState,
-    val b4State: ButtonState,
-)
+import com.github.evabishchevich.Btn1Clicked
+import com.github.evabishchevich.Btn2Clicked
+import com.github.evabishchevich.Btn3Clicked
+import com.github.evabishchevich.Btn4Clicked
+import com.github.evabishchevich.ClearResultOrError
+import com.github.evabishchevich.Event
+import com.github.evabishchevich.OnLoadingError
+import com.github.evabishchevich.OnLoadingResult
+import com.github.evabishchevich.StartLoading
+import com.github.evabishchevich.state.ButtonState
+import com.github.evabishchevich.state.CombinedButtonsState
 
-class ButtonState(
-    val visible: Boolean,
-    val painted: Boolean
-)
-
-fun CombinedButtonsState.reduceButtonsState(msg: Message): CombinedButtonsState {
+fun CombinedButtonsState.reduceCombinedStateRedux(msg: Event): CombinedButtonsState {
     return when (msg) {
         StartLoading -> CombinedButtonsState(
             ButtonState(false, b1State.painted),

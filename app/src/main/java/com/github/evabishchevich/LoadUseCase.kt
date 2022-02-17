@@ -1,19 +1,27 @@
 package com.github.evabishchevich
 
+import com.github.evabishchevich.fsm.GeneralStateStore
+import com.github.evabishchevich.redux.ReduxButtonsStateStore
 import kotlinx.coroutines.delay
 
-suspend fun load(stateHolder: StateHolder, buttonsStateStore: ButtonsStateStore) {
-    stateHolder.onMsg(StartLoading)
-    buttonsStateStore.onMsg(StartLoading)
+class LoadUseCase(
+    private val generalStateStore: GeneralStateStore,
+    private val reduxStateStore: ReduxButtonsStateStore
+) {
 
-    delay(1500)
+    suspend operator fun invoke() {
+        generalStateStore.onEvent(StartLoading)
+        reduxStateStore.onEvent(StartLoading)
 
-    val msg = if (System.currentTimeMillis() % 2 == 0L) {
-        OnLoadingResult
-    } else {
-        OnLoadingError
+        delay(1500)
+
+        val msg = if (System.currentTimeMillis() % 2 == 0L) {
+            OnLoadingResult
+        } else {
+            OnLoadingError
+        }
+
+        generalStateStore.onEvent(msg)
+        reduxStateStore.onEvent(msg)
     }
-
-    stateHolder.onMsg(msg)
-    buttonsStateStore.onMsg(msg)
 }
